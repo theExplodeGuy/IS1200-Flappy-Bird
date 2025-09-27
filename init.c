@@ -10,6 +10,7 @@ const int gaps[15] = {
 Pipe pipes[PIPES];
 Bird bird;
 
+int scroll_x = 0;
 
 int rand = 0;
 
