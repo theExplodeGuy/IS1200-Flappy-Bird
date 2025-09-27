@@ -1,0 +1,17 @@
+#include "init.h"
+#include "update.h"
+
+void update_pipes(){
+  for(int i = 0; i < PIPES; i++){
+    pipes[i].left_edge -=2;
+    if(pipes[i].left_edge + PIPE_WIDTH < 0){
+      pipes[i].left_edge = SCREEN_X + 50;
+      pipes[i].gap_y = 60 + gaps[rand%15] % (SCREEN_Y - 120);
+      rand++;
+    }
+  }
+}
+
+void update_bird(){
+  bird.y_pos += 2;
+}
