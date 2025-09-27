@@ -48,9 +48,6 @@ void handle_interrupt(int cause){
     // Request swap (value doesn't matter; write to trigger)
     *(VGA_CTRL + 0) = 0;
     VGA_FRONT = next;
-
-    
-
   }
 
   else if (cause == 17){
