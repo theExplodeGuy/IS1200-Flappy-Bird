@@ -12,3 +12,4 @@
 /init.o
 /update.o
 /draw.o
+/colissionDetector.o
