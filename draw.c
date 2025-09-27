@@ -52,7 +52,7 @@ void draw_bg(volatile unsigned char *buf){
 }
 
 void draw_gameover(volatile unsigned char *buf){
-  const unsigned char *gameover_bg = (const unsigned char*) 0x02025E40;
+  const unsigned char *gameover_bg = (const unsigned char*) 0x02025e40;
 
   for (int y = 0; y < SCREEN_Y; y++) {
       for (int x = 0; x < SCREEN_X; x++) {
