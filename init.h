@@ -36,8 +36,8 @@ extern Pipe pipes[PIPES];
 extern Bird bird;
 
 
-void init_pipes(){}
+void init_pipes();
 
-void init_bird(){}
+void init_bird();
 
-void init(){}
+void init();

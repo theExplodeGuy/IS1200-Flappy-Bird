@@ -1,5 +1,6 @@
 #include "init.h"
 
+extern void enable_interrupt(void);
 
 const int gaps[15] = {
     1012, 2004, 1152, 1972, 304, 1996,
@@ -40,4 +41,6 @@ void init(){
   *PERIODH = 29999999 >> 16;
 
   *CONTROL = 0x7; //also enable interupts
+
+  enable_interrupt();
 }

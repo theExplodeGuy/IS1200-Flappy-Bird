@@ -1,6 +1,6 @@
 // main.c
 
-#include <init.h>
+#include "init.h"
 
 
 volatile unsigned char *VGA_FRONT = (volatile unsigned char*) 0x08000000;
@@ -64,13 +64,6 @@ void draw_all_pipes(volatile unsigned char *buf){
   }
 }
 
-
-void handle_interrupt(int cause){
-  if(cause == 16){
-    
-  }
-}
-
 int scroll_x = 0;
 void draw_bg(volatile unsigned char *buf){
   const unsigned char *bg = (const unsigned char*) 0x02000000;
@@ -89,11 +82,8 @@ void update_bg(){
   scroll_x = (scroll_x + 1) % 320;
 }
 
-// Your code goes into main as well as any needed functions.
-int main ( void ) {
-  init();
-  
-  while(1){
+void handle_interrupt(int cause){
+  if(cause == 16){
     volatile unsigned char *next = (VGA_FRONT == (volatile unsigned char *)0x08000000)
                                        ? (volatile unsigned char *)(0x08000000 + 0x012c00)
                                        : (volatile unsigned char *)0x08000000;
@@ -110,6 +100,16 @@ int main ( void ) {
     // Request swap (value doesn't matter; write to trigger)
     *(VGA_CTRL + 0) = 0;
     VGA_FRONT = next;
+  }
+}
+
+
+
+// Your code goes into main as well as any needed functions.
+int main ( void ) {
+  init();
+  
+  while(1){
     
     for (int i=0; i<1000000; i++) {
       asm volatile ("nop");
