@@ -56,9 +56,7 @@ void draw_gameover(volatile unsigned char *buf){
 
   for (int y = 0; y < SCREEN_Y; y++) {
       for (int x = 0; x < SCREEN_X; x++) {
-          // Wrap horizontally using modulo
-          int src_x = (x - scroll_x) % 160;
-          buf[y * SCREEN_X + x] = gameover_bg[(y+1) * 160 + src_x];
+          buf[y * SCREEN_X + x] = gameover_bg[(y) * 160 + x];
       }
   }
 }
