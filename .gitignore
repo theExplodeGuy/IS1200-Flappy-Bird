@@ -1,0 +1,11 @@
+/COPYING
+/boot.o
+/dtekv-lib.c
+/dtekv-lib.h
+/dtekv-lib.o
+/dtekv-script.lds
+/labmain.o
+/main.bin
+/main.elf
+/main.elf.txt
+/softfloat.a
