@@ -34,7 +34,7 @@ void handle_interrupt(int cause){
     draw_bird(next);
 
 
-    if(collision_bound()){
+    if(collision_bound() || collision_pipe()){
       draw_gameover(next);
       *STATUS_TO = 0x1;
     }
