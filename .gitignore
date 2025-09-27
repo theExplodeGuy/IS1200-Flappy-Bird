@@ -10,3 +10,5 @@
 /main.elf.txt
 /softfloat.a
 /init.o
+/update.o
+/draw.o

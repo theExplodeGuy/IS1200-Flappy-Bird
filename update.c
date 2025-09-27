@@ -16,6 +16,10 @@ void update_bird(){
   bird.y_pos += 2;
 }
 
+void update_bird_btn(){
+  bird.y_pos -= 10;
+}
+
 void update_bg(){
   scroll_x = (scroll_x + 1) % 320;
 }

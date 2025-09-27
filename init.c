@@ -43,5 +43,10 @@ void init(){
 
   *CONTROL = 0x7; //also enable interupts
 
+  volatile unsigned short *SW = (volatile unsigned short *)0x04000018;
+  volatile unsigned short *SW_EDGE = (volatile unsigned short *)0x0400001c;
+  *SW = 0x4;
+  *SW_EDGE = 0x4;
+
   enable_interrupt();
 }

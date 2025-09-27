@@ -10,19 +10,26 @@ volatile unsigned char *VGA_BACK = (volatile unsigned char*) 0x08000000 + 0x12c0
 
 volatile int *VGA_CTRL = (volatile int*) 0x04000100;
 
-
+int get_btn(void){
+  volatile int *BTN_ADDRESS = (volatile int *) 0x040000d0;
+  return (*BTN_ADDRESS % 10);
+}
 
 void handle_interrupt(int cause){
-  if(cause == 16){
-    volatile unsigned char *next = (VGA_FRONT == (volatile unsigned char *)0x08000000)
+  volatile unsigned char *next = (VGA_FRONT == (volatile unsigned char *)0x08000000)
                                        ? (volatile unsigned char *)(0x08000000 + 0x012c00)
                                        : (volatile unsigned char *)0x08000000;
 
-    
+  if(cause == 16){
     update_bg();
     draw_bg(next);
     update_pipes();
-    update_bird();
+    
+    if(get_btn())
+      update_bird_btn();
+    else
+      update_bird();
+
     draw_all_pipes(next);
     draw_bird(next);
 
@@ -31,7 +38,15 @@ void handle_interrupt(int cause){
     *(VGA_CTRL + 0) = 0;
     VGA_FRONT = next;
   }
+
+  else if (cause == 17){
+    update_bird_btn();
+    volatile unsigned short *SW_EDGE = (volatile unsigned short *)0x0400001c;
+    *SW_EDGE = 0x4;
+  }
+
 }
+
 
 
 
@@ -41,9 +56,7 @@ int main ( void ) {
   
   while(1){
     
-    for (int i=0; i<1000000; i++) {
-      asm volatile ("nop");
-    }
+    get_btn();
 
   }
 
