@@ -52,12 +52,8 @@ void draw_bg(volatile unsigned char *buf){
 }
 
 void draw_gameover(volatile unsigned char *buf){
-  const unsigned char *bg = (const unsigned char*) 0x02000000;
-
   for (int y = 0; y < SCREEN_Y; y++) {
       for (int x = 0; x < SCREEN_X; x++) {
-          // Wrap horizontally using modulo
-          int src_x = (x - scroll_x) % 160;
           buf[y * SCREEN_X + x] = 0; // Black out the screen
       }
   }

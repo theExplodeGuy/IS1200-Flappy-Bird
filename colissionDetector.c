@@ -4,24 +4,12 @@
 
 
 
-void colissionDetector(volatile unsigned char *buf){
-    if (bird.y_pos <= 0 || bird.y_pos + 32 >= SCREEN_Y) {
-        draw_gameover(buf);
-        return;
+int collision_bound(){
+    if (bird.y_pos+20 < 0 || bird.y_pos+15 > SCREEN_Y) {
+      bird.x_pos = -1000000000;
+      bird.y_pos = -1000000000;  
+      return 1;
     }
-
-    for (int i = 0; i < PIPES; i++) {
-    int pipe_left = pipes[i].left_edge;
-    int pipe_right = pipes[i].left_edge + PIPE_WIDTH;
-    int gap_top = pipes[i].gap_y - PIPE_GAP / 2;
-    int gap_bottom = pipes[i].gap_y + PIPE_GAP / 2;
-
-    if (bird.x_pos + 32 >= pipe_left && bird.x_pos <= pipe_right) {
-      if (bird.y_pos < gap_top || bird.y_pos + 32 > gap_bottom) {
-        draw_gameover(buf);
-        return;
-      }
-    }
-    }
+    return 0;
 }
 

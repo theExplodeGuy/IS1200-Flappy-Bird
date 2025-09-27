@@ -1,2 +1,3 @@
 
-void colissionDetector(volatile unsigned char *buf);
+int collision_bound();
+int collision_pipe();

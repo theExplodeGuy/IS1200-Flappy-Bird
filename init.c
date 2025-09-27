@@ -39,7 +39,7 @@ void init(){
 
 
   *PERIODL = 29999999 & 0xffff;
-  *PERIODH = 29999999 >> 16;
+  *PERIODH = 0;
 
   *CONTROL = 0x7; //also enable interupts
 
