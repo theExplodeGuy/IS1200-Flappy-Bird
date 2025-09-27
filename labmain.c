@@ -23,6 +23,7 @@ void handle_interrupt(int cause){
     draw_bg(next);
     update_pipes();
     update_bird();
+    colissionDetector(next);
     draw_all_pipes(next);
     draw_bird(next);
 
