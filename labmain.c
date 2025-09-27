@@ -13,6 +13,7 @@ volatile int *VGA_CTRL = (volatile int*) 0x04000100;
 
 
 int scroll_x = 0;
+
 void draw_bg(volatile unsigned char *buf){
   const unsigned char *bg = (const unsigned char*) 0x02000000;
 
