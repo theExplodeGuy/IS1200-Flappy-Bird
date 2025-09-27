@@ -1,13 +1,6 @@
 // main.c
-#define SKY_BLUE   110
-#define PIPE_GREEN 52
-#define GROUND_BROWN 149
-#define BIRD_YELLOW 254
-#define BEAK_ORANGE 245
-#define WING_LIGHT  255
-#define EYE_WHITE       255
-#define EYE_PUPIL       0
-#define TRANSPARENT 0
+
+#include <init.h>
 
 
 volatile unsigned char *VGA_FRONT = (volatile unsigned char*) 0x08000000;
@@ -15,48 +8,6 @@ volatile unsigned char *VGA_BACK = (volatile unsigned char*) 0x08000000 + 0x12c0
 
 volatile int *VGA_CTRL = (volatile int*) 0x04000100;
 
-
-#define SCREEN_X 320
-#define SCREEN_Y 240
-
-#define PIPES 4
-
-#define PIPE_GAP 60
-#define PIPE_WIDTH 30
-
-typedef struct Pipe{
-  int left_edge; // top most left corner
-  int gap_y; // middlle of the opening of the pipe
-  int active;
-}Pipe;
-
-typedef struct Bird{
-  int x_pos;
-  int y_pos;
-  int alive;
-}Bird;
-
-Pipe pipes[PIPES];
-Bird bird;
-
-int gaps[15] = {1012, 2004, 1152, 1972, 304, 1996, 
-  2021, 2005, 1994, 49, 824, 1453, 5559, 1821, 4897};
-int rand = 0;
-
-void init_pipes(){
-  for(int i = 0; i < PIPES; i++){
-    pipes[i].left_edge = SCREEN_X + i * 100; // space pipes 80pxls apart
-    pipes[i].gap_y = 60 + gaps[rand%15] % (SCREEN_Y - 120); // TODO: rand()
-    pipes[i].active = 1; // active
-    rand++;
-  }
-}
-
-void init_bird(){
-  bird.x_pos = 80;
-  bird.y_pos = 100;
-  bird.alive = 1;
-}
 
 void update_pipes(){
   for(int i = 0; i < PIPES; i++){
@@ -111,21 +62,6 @@ void draw_all_pipes(volatile unsigned char *buf){
   for (int i = 0; i < PIPES; i++){
     draw_pipe(pipes[i].left_edge, pipes[i].gap_y, buf);
   }
-}
-
-void init(){
-  init_pipes();
-  init_bird();
-
-  volatile unsigned short *PERIODL = (volatile unsigned short *) 0x04000028;
-  volatile unsigned short *PERIODH = (volatile unsigned short *) 0x0400002c;
-  volatile unsigned short *CONTROL = (volatile unsigned short *)0x04000024;
-
-
-  *PERIODL = 29999999 & 0xffff;
-  *PERIODH = 29999999 >> 16;
-
-  *CONTROL = 0x7; //also enable interupts
 }
 
 
