@@ -16,6 +16,12 @@ int get_btn(void){
   return (*BTN_ADDRESS % 10);
 }
 
+// Your code goes into main as well as any needed functions.
+int main ( void ) {
+  init();
+
+}
+
 void handle_interrupt(int cause){
   volatile unsigned short *STATUS_TO = (volatile unsigned short *)0x04000020;
 
@@ -51,24 +57,15 @@ void handle_interrupt(int cause){
   }
 
   else if (cause == 17){
-    update_bird_btn();
     volatile unsigned short *SW_EDGE = (volatile unsigned short *)0x0400001c;
     *SW_EDGE = 0x4;
-  }
-
-}
-
-
-
-
-// Your code goes into main as well as any needed functions.
-int main ( void ) {
-  init();
-  
-  while(1){
+    main();
     
-    get_btn();
-
   }
 
 }
+
+
+
+
+

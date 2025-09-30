@@ -56,7 +56,7 @@ void draw_gameover(volatile unsigned char *buf){
 
   for (int y = 0; y < SCREEN_Y; y++) {
       for (int x = 0; x < SCREEN_X; x++) {
-          buf[y * SCREEN_X + x] = gameover_bg[(y) * 160 + x];
+          buf[y * SCREEN_X + x] = gameover_bg[(y) * 320 + x];
       }
   }
 }
