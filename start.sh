@@ -19,6 +19,6 @@ cd /home/marios/Documents/IS1200/dtekv-tools || exit
 ./dtekv-upload $SPRITES/sprites/background5.raw 0x02009600
 ./dtekv-upload $SPRITES/sprites/background5.raw 0x02012c00
 ./dtekv-upload $SPRITES/sprites/gameover.raw  0x02025e40
-./dtekv-upload $SPRITES/sprites/startscreen.raw  0x0203AFC0
+./dtekv-upload $SPRITES/sprites/startscreen.raw  0x0203afc0
 
 

@@ -11,6 +11,10 @@ volatile unsigned char *VGA_FRONT = (volatile unsigned char*) 0x08000000;
 volatile unsigned char *VGA_BACK = (volatile unsigned char*) 0x08000000 + 0x12c00;
 
 volatile int *VGA_CTRL = (volatile int*) 0x04000100;
+volatile int start = 1;
+volatile int init_needed = 0;
+
+extern void enable_interrupt(void);
 
 
 void handle_interrupt(int cause){
@@ -44,12 +48,14 @@ void handle_interrupt(int cause){
     // Request swap (value doesn't matter; write to trigger)
     *(VGA_CTRL + 0) = 0;
     VGA_FRONT = next;
+    return;
   }
 
   else if (cause == 17){
     volatile unsigned short *SW_EDGE = (volatile unsigned short *)0x0400001c;
     *SW_EDGE = 0x4;
-    init();   
+    init();  
+    return;
   }
 
   else if (cause == 18){
@@ -59,11 +65,13 @@ void handle_interrupt(int cause){
     volatile int *BTN_ADDRESS = (volatile int *) 0x040000d0;
     if(*BTN_ADDRESS % 10)
       update_bird_btn();
+    return;
   }
 }
 
 int main ( void ) {
-  init();
+  init_start_screen();
+  draw_starting_screen(VGA_FRONT);
 }
 
 

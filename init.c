@@ -92,3 +92,11 @@ void init(){
 
   enable_interrupt();
 }
+
+void init_start_screen(){
+  volatile unsigned short *SW = (volatile unsigned short *)0x04000018;
+  volatile unsigned short *SW_EDGE = (volatile unsigned short *)0x0400001c;
+  *SW = 0x4;
+  *SW_EDGE = 0x4;
+  enable_interrupt();
+}
