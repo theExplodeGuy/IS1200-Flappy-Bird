@@ -4,6 +4,7 @@
 #include "draw.h"
 #include "update.h"
 #include "colissionDetector.h"
+#include "score.h"
 
 
 volatile unsigned char *VGA_FRONT = (volatile unsigned char*) 0x08000000;
@@ -44,6 +45,8 @@ void handle_interrupt(int cause){
       draw_gameover(next);
       *STATUS_TO = 0x1;
     }
+
+    live_score();
 
     if(get_btn())
       update_bird_btn();

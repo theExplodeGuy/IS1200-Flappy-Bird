@@ -19,6 +19,7 @@
 extern const int gaps[15];
 extern int rand;
 extern int scroll_x;
+extern int score;
 
 
 typedef struct Pipe{

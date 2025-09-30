@@ -14,6 +14,8 @@ int scroll_x = 0;
 
 int rand = 0;
 
+int score = 0;
+
 void init_pipes(){
   for(int i = 0; i < PIPES; i++){
     pipes[i].left_edge = SCREEN_X + i * 100; // space pipes 80pxls apart
