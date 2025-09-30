@@ -18,10 +18,7 @@ int get_btn(void){
 }
 
 // Your code goes into main as well as any needed functions.
-int main ( void ) {
-  init();
 
-}
 
 void handle_interrupt(int cause){
   volatile unsigned short *STATUS_TO = (volatile unsigned short *)0x04000020;
@@ -48,10 +45,7 @@ void handle_interrupt(int cause){
 
     live_score();
 
-    if(get_btn())
-      update_bird_btn();
-    else
-      update_bird();
+    update_bird();
 
     *(VGA_CTRL + 1) = (unsigned int) next;
     // Request swap (value doesn't matter; write to trigger)
@@ -62,10 +56,12 @@ void handle_interrupt(int cause){
   else if (cause == 17){
     volatile unsigned short *SW_EDGE = (volatile unsigned short *)0x0400001c;
     *SW_EDGE = 0x4;
-    main();
-    
+    init();   
   }
+}
 
+int main ( void ) {
+  init();
 }
 
 

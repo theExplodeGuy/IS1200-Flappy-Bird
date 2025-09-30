@@ -8,7 +8,6 @@ void live_score() {
 
     for (int i = 0; i < PIPES; i++) {
     int pipe_x_center = pipes[i].left_edge + PIPE_WIDTH/2;
-    int pipe_y_center = pipes[i].gap_y;
 
     if (pipe_x_center >= bird.x_pos -10 && pipe_x_center <= bird.x_pos +10) {
         score = score + 10;

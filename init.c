@@ -66,7 +66,8 @@ void init_bird(){
 void init(){
   init_pipes();
   init_bird();
-
+  init_hexdisplays();
+  
   volatile unsigned short *PERIODL = (volatile unsigned short *) 0x04000028;
   volatile unsigned short *PERIODH = (volatile unsigned short *) 0x0400002c;
   volatile unsigned short *CONTROL = (volatile unsigned short *)0x04000024;
