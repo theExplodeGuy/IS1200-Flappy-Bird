@@ -43,3 +43,7 @@ void init_pipes();
 void init_bird();
 
 void init();
+
+void init_hexdisplays();
+
+void set_displays(int display_number, int value);
