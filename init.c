@@ -14,6 +14,40 @@ int scroll_x = 0;
 
 int rand = 0;
 
+int score = 0;
+
+void set_displays(int display_number, int value){
+  volatile int *arr[6] = {
+    (volatile int *)0x04000050,
+    (volatile int *)0x04000060,
+    (volatile int *)0x04000070,
+    (volatile int *)0x04000080,
+    (volatile int *)0x04000090,
+    (volatile int *)0x040000a0
+};
+
+  int volatile *display_address = arr[display_number-1];
+  int display_values[10] = {
+    0xc0,
+    0xf9,
+    0xa4, 
+    0xb0, 
+    0x99,
+    0x92, 
+    0x82, 
+    0xf8,
+    0x80, 
+    0x90
+  };
+    *display_address = display_values[value];
+}
+
+void init_hexdisplays(){
+  for(int i = 1; i <= 6; i++){
+    set_displays(i, 0);
+  }
+}
+
 void init_pipes(){
   for(int i = 0; i < PIPES; i++){
     pipes[i].left_edge = SCREEN_X + i * 100; // space pipes 80pxls apart
@@ -32,7 +66,8 @@ void init_bird(){
 void init(){
   init_pipes();
   init_bird();
-
+  init_hexdisplays();
+  
   volatile unsigned short *PERIODL = (volatile unsigned short *) 0x04000028;
   volatile unsigned short *PERIODH = (volatile unsigned short *) 0x0400002c;
   volatile unsigned short *CONTROL = (volatile unsigned short *)0x04000024;

@@ -13,3 +13,5 @@
 /update.o
 /draw.o
 /colissionDetector.o
+/score.o
+/timetemplate.o

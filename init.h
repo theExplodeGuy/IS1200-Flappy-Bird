@@ -19,6 +19,7 @@
 extern const int gaps[15];
 extern int rand;
 extern int scroll_x;
+extern int score;
 
 
 typedef struct Pipe{
@@ -42,3 +43,7 @@ void init_pipes();
 void init_bird();
 
 void init();
+
+void init_hexdisplays();
+
+void set_displays(int display_number, int value);
