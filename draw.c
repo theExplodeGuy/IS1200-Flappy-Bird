@@ -60,3 +60,13 @@ void draw_gameover(volatile unsigned char *buf){
       }
   }
 }
+
+void draw_starting_screen(volatile unsigned char *buf){
+  const unsigned char *starting_bg = (const unsigned char*) 0x0203AFC0;
+
+  for (int y = 0; y < SCREEN_Y; y++) {
+      for (int x = 0; x < SCREEN_X; x++) {
+          buf[y * SCREEN_X + x] = starting_bg[(y) * 320 + x];
+      }
+  }
+}
