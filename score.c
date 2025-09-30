@@ -36,16 +36,15 @@ void live_score() {
     int pipe_x_center = pipes[i].left_edge + PIPE_WIDTH/2;
     int pipe_y_center = pipes[i].gap_y;
 
-    if (pipe_x_center >= bird.x_pos -10 || pipe_x_center <= bird.x_pos +10) {
-      if (pipe_y_center >= bird.y_pos -10 || pipe_y_center <= bird.y_pos +10) {
+    if (pipe_x_center >= bird.x_pos -10 && pipe_x_center <= bird.x_pos +10) {
         score = score + 10;
-        set_displays(1, score%16);
-        set_displays(2, (score>>4)%16);
-        set_displays(3, (score>>8)%16);
-        set_displays(4, (score>>12)%16);
-        set_displays(5, (score>>16)%16);
-        set_displays(6, (score>>20)%16);
-      }
+        set_displays(1, score%10);
+        set_displays(2, (score/10%10));
+        set_displays(3, (score/100%10));
+        set_displays(4, (score/1000%10));
+        set_displays(5, (score/10000%10));
+        set_displays(6, (score/100000%10));
+      
     }
   }
 }
