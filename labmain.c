@@ -11,11 +11,6 @@ volatile unsigned char *VGA_FRONT = (volatile unsigned char*) 0x08000000;
 volatile unsigned char *VGA_BACK = (volatile unsigned char*) 0x08000000 + 0x12c00;
 
 volatile int *VGA_CTRL = (volatile int*) 0x04000100;
-volatile int start = 1;
-volatile int init_needed = 0;
-
-extern void enable_interrupt(void);
-
 
 void handle_interrupt(int cause){
   volatile unsigned short *STATUS_TO = (volatile unsigned short *)0x04000020;
