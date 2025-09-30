@@ -12,13 +12,6 @@ volatile unsigned char *VGA_BACK = (volatile unsigned char*) 0x08000000 + 0x12c0
 
 volatile int *VGA_CTRL = (volatile int*) 0x04000100;
 
-int get_btn(void){
-  volatile int *BTN_ADDRESS = (volatile int *) 0x040000d0;
-  return (*BTN_ADDRESS % 10);
-}
-
-// Your code goes into main as well as any needed functions.
-
 
 void handle_interrupt(int cause){
   volatile unsigned short *STATUS_TO = (volatile unsigned short *)0x04000020;
@@ -57,6 +50,15 @@ void handle_interrupt(int cause){
     volatile unsigned short *SW_EDGE = (volatile unsigned short *)0x0400001c;
     *SW_EDGE = 0x4;
     init();   
+  }
+
+  else if (cause == 18){
+    volatile unsigned int *BTN_ADDRESS_EDGE = (volatile unsigned int *) 0x040000dc;
+    *BTN_ADDRESS_EDGE = 0x1;
+
+    volatile int *BTN_ADDRESS = (volatile int *) 0x040000d0;
+    if(*BTN_ADDRESS % 10)
+      update_bird_btn();
   }
 }
 

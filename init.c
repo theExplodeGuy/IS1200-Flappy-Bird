@@ -83,5 +83,12 @@ void init(){
   *SW = 0x4;
   *SW_EDGE = 0x4;
 
+  //volatile unsigned int *BTN_ADDRESS = (volatile unsigned int *) 0x040000d0;
+  volatile unsigned int *BTN_ADDRESS_IQR = (volatile unsigned int *) 0x040000d8;
+  volatile unsigned int *BTN_ADDRESS_EDGE = (volatile unsigned int *) 0x040000dc;
+  
+  *BTN_ADDRESS_IQR = 0x1;
+  *BTN_ADDRESS_EDGE = 0x1;
+
   enable_interrupt();
 }
