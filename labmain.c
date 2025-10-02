@@ -5,6 +5,7 @@
 #include "update.h"
 #include "colissionDetector.h"
 #include "score.h"
+#include "helpers.h"
 
 
 volatile unsigned char *VGA_FRONT = (volatile unsigned char*) 0x08000000;
@@ -14,6 +15,8 @@ volatile int *VGA_CTRL = (volatile int*) 0x04000100;
 
 void handle_interrupt(int cause){
   volatile unsigned short *STATUS_TO = (volatile unsigned short *)0x04000020;
+  volatile unsigned short *CONTROL = (volatile unsigned short *)0x04000024;
+
 
   volatile unsigned char *next = (VGA_FRONT == (volatile unsigned char *)0x08000000)
                                        ? (volatile unsigned char *)(0x08000000 + 0x012c00)
@@ -33,6 +36,8 @@ void handle_interrupt(int cause){
     if(collision_bound() || collision_pipe()){
       draw_gameover(next);
       *STATUS_TO = 0x1;
+      *CONTROL = 0x8;
+      read_registers();
     }
 
     live_score();
@@ -43,14 +48,13 @@ void handle_interrupt(int cause){
     // Request swap (value doesn't matter; write to trigger)
     *(VGA_CTRL + 0) = 0;
     VGA_FRONT = next;
-    return;
   }
 
   else if (cause == 17){
     volatile unsigned short *SW_EDGE = (volatile unsigned short *)0x0400001c;
     *SW_EDGE = 0x4;
     init();  
-    return;
+    clear_registers();
   }
 
   else if (cause == 18){
@@ -60,7 +64,6 @@ void handle_interrupt(int cause){
     volatile int *BTN_ADDRESS = (volatile int *) 0x040000d0;
     if(*BTN_ADDRESS % 10)
       update_bird_btn();
-    return;
   }
 }
 

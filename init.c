@@ -53,7 +53,7 @@ void init_pipes(){
     pipes[i].left_edge = SCREEN_X + i * 100; // space pipes 80pxls apart
     pipes[i].gap_y = 60 + gaps[rand%15] % (SCREEN_Y - 120); // TODO: rand()
     pipes[i].active = 1; // active
-    rand++;
+    asm("csrr %0, mcycle" : "=r"(rand));
   }
 }
 
@@ -73,15 +73,18 @@ void init(){
   volatile unsigned short *CONTROL = (volatile unsigned short *)0x04000024;
 
 
+
   *PERIODL = 29999999 & 0xffff;
   *PERIODH = 0;
+  
+  *CONTROL = 0x07; //also enable interupts
 
-  *CONTROL = 0x7; //also enable interupts
-
+  /*
   volatile unsigned short *SW = (volatile unsigned short *)0x04000018;
   volatile unsigned short *SW_EDGE = (volatile unsigned short *)0x0400001c;
   *SW = 0x4;
   *SW_EDGE = 0x4;
+  */
 
   //volatile unsigned int *BTN_ADDRESS = (volatile unsigned int *) 0x040000d0;
   volatile unsigned int *BTN_ADDRESS_IQR = (volatile unsigned int *) 0x040000d8;
@@ -90,7 +93,7 @@ void init(){
   *BTN_ADDRESS_IQR = 0x1;
   *BTN_ADDRESS_EDGE = 0x1;
 
-  enable_interrupt();
+  //enable_interrupt();
 }
 
 void init_start_screen(){
