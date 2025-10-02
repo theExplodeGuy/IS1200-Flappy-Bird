@@ -1,3 +1,5 @@
+// Authored by: Marios Stavrou
+
 #include "init.h"
 
 void draw_bird(volatile unsigned char *buf){

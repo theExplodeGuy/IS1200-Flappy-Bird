@@ -1,4 +1,7 @@
 #!/bin/bash
+
+#Authored by: Marios Stavrou
+
 echo "Starting the script..."
 
 

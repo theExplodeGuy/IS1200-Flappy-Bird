@@ -1,4 +1,5 @@
 // main.c
+// Authored by: Panayiotis Charalambous. Marios Stavrou
 
 #include "init.h"
 #include "draw.h"

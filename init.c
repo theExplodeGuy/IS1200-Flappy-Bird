@@ -1,3 +1,5 @@
+// Authored by: Marios Stavrou, Panayiotis Charalambous
+
 #include "init.h"
 
 extern void enable_interrupt(void);

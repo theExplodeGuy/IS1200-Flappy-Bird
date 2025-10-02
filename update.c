@@ -1,3 +1,5 @@
+// Authored by: Marios Stavrou, Panayiotis Charalambous
+
 #include "init.h"
 #include "update.h"
 

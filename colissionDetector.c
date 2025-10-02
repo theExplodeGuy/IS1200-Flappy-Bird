@@ -1,3 +1,5 @@
+// Authored by: Panayioties Charalambous
+
 #include "colissionDetector.h"
 #include "init.h"
 #include "draw.h"

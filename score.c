@@ -1,3 +1,5 @@
+// Authored by: Panayiotis Charalambous
+
 #include "score.h"
 #include "init.h"
 #include "draw.h"
