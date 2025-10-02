@@ -6,6 +6,7 @@ export PATH=$PATH:/home/marios/intelFPGA/23.1std/qprogrammer/bin
 export PATH=/opt/riscv/bin/:$PATH
 
 SPRITES="/home/marios/Documents/IS1200/labs/miniproject"
+RUNMAIN="/home/marios/Documents/IS1200/labs/miniproject/main.bin"
 
 jtagd --user-start
 jtagconfig
@@ -21,4 +22,4 @@ cd /home/marios/Documents/IS1200/dtekv-tools || exit
 ./dtekv-upload $SPRITES/sprites/gameover.raw  0x02025e40
 ./dtekv-upload $SPRITES/sprites/startscreen.raw  0x0203afc0
 
-
+./dtekv-run $RUNMAIN
