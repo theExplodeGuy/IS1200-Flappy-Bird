@@ -66,6 +66,7 @@ void init_bird(){
 }
 
 void init(){
+  score = 0;
   init_pipes();
   init_bird();
   init_hexdisplays();
