@@ -14,6 +14,7 @@ RUNMAIN="/home/marios/Documents/IS1200/labs/miniproject/main.bin"
 jtagd --user-start
 jtagconfig
 
+make
 
 cd /home/marios/Documents/IS1200/dtekv-tools || exit
 
